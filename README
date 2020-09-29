@@ -1,1 +1,15 @@
 # Baby_Circadian_Clocks
+
+Parents of toddlers carefully guard and manage when and for how long their babies nap during the day and sleep at night. Not doing so could torpedo your night's sleep or Netflix plans and your next day's schedule. In fact, in our family, since my 2-year old son, Shaelo, naps and my 4-year old daughter, Danae, doesn't nap, a controlled circadian experiment unfolds every day. Naturally, I was curious to learn more.
+
+Here, I work with data from the C.S. Mott Children's Hospital in Ann Arbor, Michigan to answer 3 burning questions:
+
+Question 1: At what time do napping babies in the U.S. sleep at night?
+Question 2: Is night bedtime for napping babies in the U.S. later than that of non-napping babies?
+Question 3: Is sleep duration for napping babies in the U.S. different than that of non-napping babies?
+
+If you're curious, check out the original study on the differences in circadian clocks of napping and non-napping babies (https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0125181).
+
+In this analysis, I formulate clear and focused questions that detail our target populations and parameters, hypotheses, alpha, and assumptions upfront. This part is super-important in order to perform a high quality analysis, draw the right conclusions, and not go down rabbit holes. I also walk through creating relevant dataframes for each analysis and applying numpy and statsmodels functions. I use simplifying assumptions of random, independent sampling normally distributed populations of nappers and non-nappers with similar variances. As you'll see from my initial plots below looking to understand the data that the sample is fairly small and that there is a bit of deviation from these assumptions. In a future post, I'll apply unpooled standard errors and non-parametric methods (e.g., Mann-Whitney) to test our hypotheses without these assumptions.
+
+To answer Question 1, I calculate a 95% confidence interval using both sm.stats.DescrStatsW and calculating lower and upper confidence bounds manually. To answer Question 2, I calculate a 1-sided P-value using t.cdf, t.sf, and sm.stats.ttest_ind (and halving the result). To answer Question 3, I calculate a 2-sided P-value using 1-t.cdf and sm.stats.ttest_ind. Lastly, I apply the Bonferroni Correction. "P hacking," including going into the subgroups or multiple hypothesis rabbit hole, increases the chance of observing rare events, or false positives (Type 1 Error). I apply the Bonferroni Correction to correct for this and raise the bar for rejecting our null hypothesis. Equally important, I walk through how to interpret the results from the confidence intervals and hypothesis tests to generate conclusions. 
